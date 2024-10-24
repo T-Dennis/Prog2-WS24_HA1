@@ -88,9 +88,6 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-
-    //TODO hier weitere Tests erstellen
-
     @Test
     @DisplayName("should display result after subtracting two single-digit numbers")
     void testSubtraktion(){
@@ -105,6 +102,33 @@ class CalculatorTest {
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Soll einen Fehler anzeigen, wenn die Null invertiert wird")
+    void testInversionMitNull() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Soll nach einer binären Operation das Vorzeichen korrekt ändern")
+    void vorzeichenWechselNachOperation(){
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(2);
+        calc.pressUnaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressNegativeKey();
+        calc.pressEqualsKey();
+
+        String expected = "1";
+        String actual = calc.readScreen();
     }
 }
 
