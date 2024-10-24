@@ -118,16 +118,18 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("Soll nach einer binären Operation das Vorzeichen korrekt ändern")
-    void vorzeichenWechselNachOperation(){
+    @DisplayName("Soll nach mehrmals = drücken, die letzte Operation mit dem aktuellen Bildschirminhalt wiederholen.")
+    void testMehrfachGleich(){
         Calculator calc = new Calculator();
+
         calc.pressDigitKey(2);
-        calc.pressUnaryOperationKey("+");
-        calc.pressDigitKey(1);
-        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
         calc.pressEqualsKey();
 
-        String expected = "1";
+        String expected = "-4";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
